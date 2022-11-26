@@ -2,7 +2,7 @@
   "name": "frontend2",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://canteen-backend-delta.vercel.app",
+  "proxy": "https://canteen-backend-delta.vercel.app/",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.5",
