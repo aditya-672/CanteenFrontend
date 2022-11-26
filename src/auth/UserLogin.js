@@ -24,7 +24,7 @@ export default function SimpleCard(props) {
   const loginhandler = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch("./userlogin", {
+      const res = await fetch("https://canteen-backend-delta.vercel.app/userlogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
