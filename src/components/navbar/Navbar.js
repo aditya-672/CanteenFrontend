@@ -29,7 +29,7 @@ export default function Simple(props: ButtonProps) {
                             <HamburgerIcon />
                         </Button>
                         <Heading as='h2' size='md' noOfLines={1}>
-                            Happy Plates
+                            VIT Canteen
                         </Heading>
                     </Box>
                     <Button
@@ -45,7 +45,7 @@ export default function Simple(props: ButtonProps) {
             <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
                 <DrawerOverlay />
                 <DrawerContent>
-                    <DrawerHeader borderBottomWidth='1px'>Logo</DrawerHeader>
+                    <DrawerHeader borderBottomWidth='1px'>VIT Canteen</DrawerHeader>
                     <DrawerBody>
                         <Link to="/canteen" >
                             <Flex align="center"

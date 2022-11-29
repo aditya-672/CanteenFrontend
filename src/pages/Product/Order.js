@@ -26,10 +26,11 @@ import {
   // Select,
   RadioGroup,
   Radio,
+  Heading,
   Stack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import './Order.css'
+import "./Order.css";
 
 function ProductAddToCart() {
   const [empty, setEmpty] = useState(false);
@@ -56,26 +57,25 @@ function ProductAddToCart() {
     }
     const i = data.map((item) => {
       if (item.orderStatus === "Done" && item.paymentStatus === "Done") {
-        return true
+        return true;
+      } else {
+        return false;
       }
-      else {
-        return false
-      }
-    })
+    });
+    console.log(i);
     if (i === true) {
-      setEmpty(true)
-    }
-    else {
+      setEmpty(true);
+    } else {
       setEmpty(false);
     }
   };
 
   const handleUpdate = async () => {
     if (!oS) {
-      setOS(updatedata.orderStatus)
+      setOS(updatedata.orderStatus);
     }
     if (!pS) {
-      setPS(updatedata.paymentStatus)
+      setPS(updatedata.paymentStatus);
     }
     try {
       const res = await fetch("/updateStatus", {
@@ -111,9 +111,18 @@ function ProductAddToCart() {
     getData();
   }, [updatedata]);
   return (
-    <SimpleGrid minChildWidth='250px' spacing={2} p='10'>
-      <Flex className="flex-div" gap='15px' alignItems="center" justifyContent="center">
-        {empty && <h1>Empty</h1>}
+    <SimpleGrid minChildWidth="250px" spacing={2} p="10">
+      <Flex
+        className="flex-div"
+        gap="15px"
+        alignItems="center"
+        justifyContent="center"
+      >
+        {/* {empty && (
+          <Heading as="h2" size="md" noOfLines={1}>
+            No Orders
+          </Heading>
+        )} */}
         {orderlist.map((data) => {
           if (data.orderStatus === "Done" && data.paymentStatus === "Done") {
             return <Box key={data.id}></Box>;
@@ -126,8 +135,8 @@ function ProductAddToCart() {
               rounded="lg"
               shadow="lg"
               position="relative"
-              w='370px'
-              h='full'
+              w="370px"
+              h="full"
             >
               {data.isNew && (
                 <Circle
@@ -152,23 +161,47 @@ function ProductAddToCart() {
                     </Badge>
                   )}
                 </Box>
-                <Flex mt="1" justifyContent="space-between" alignContent="center">
+                <Flex
+                  mt="1"
+                  justifyContent="space-between"
+                  alignContent="center"
+                  alignItems="center"
+                >
                   <Text fontSize="lg">Order Id : </Text>
                   <Box
-                    fontSize="2xl"
-                    fontWeight="semibold"
-                    as="h4"
+                    fontSize="xl"
+                    // fontWeight="semibold"
+                    // as="h1"
                     lineHeight="tight"
                   >
                     {data.orderid}
                   </Box>
+                  
+                </Flex>
+                <Flex
+                  // mt="1"
+                  pb="2 "
+                  justifyContent="space-between"
+                  alignContent="center"
+                  alignItems="center"
+                >
+                  <Text fontSize="lg">Order By : </Text>
+                  <Box
+                    fontSize="xl"
+                    // fontWeight="semibold"
+                    // as="h1"
+                    lineHeight="tight"
+                  >
+                    {data.studentname}
+                  </Box>
+                  
                 </Flex>
                 <Flex justifyContent="space-between" alignContent="center">
-                  <Box w='full' fontSize="2xl">
-                    <Box w='full' as="span" color={"gray.600"} fontSize="lg">
-                      <Accordion allowMultiple w='full' >
+                  <Box w="full" fontSize="2xl">
+                    <Box w="full" as="span" color={"gray.600"} fontSize="lg">
+                      <Accordion allowMultiple w="full">
                         {data.order.map((item) => {
-                          console.log(data)
+                          console.log(data);
                           return (
                             <AccordionItem key={item.id}>
                               <h2>
@@ -182,7 +215,9 @@ function ProductAddToCart() {
                                   <AccordionIcon />
                                 </AccordionButton>
                               </h2>
-                              <AccordionPanel pb={4}>{item.price}</AccordionPanel>
+                              <AccordionPanel pb={4}>
+                                {item.price}
+                              </AccordionPanel>
                               <AccordionPanel pb={4}>
                                 {" "}
                                 <img
@@ -190,7 +225,7 @@ function ProductAddToCart() {
                                   alt={`Picture of ${item.image}`}
                                   roundedTop="lg"
                                   w="270px"
-                                  style={{ width: '270px' }}
+                                  style={{ width: "270px" }}
                                 />
                               </AccordionPanel>
                             </AccordionItem>
@@ -208,7 +243,11 @@ function ProductAddToCart() {
                     {data.totalprice}
                   </Box>
                 </Flex>
-                <Flex justifyContent="space-between" alignContent="center" mt="2">
+                <Flex
+                  justifyContent="space-between"
+                  alignContent="center"
+                  mt="2"
+                >
                   <Box fontSize="2xl">
                     <Button
                       colorScheme="teal"
@@ -216,7 +255,7 @@ function ProductAddToCart() {
                       onClick={() => {
                         onOpen();
                         setUpdateData(data);
-                        console.log("update",updatedata);
+                        console.log("update", updatedata);
                       }}
                     >
                       Update Status
@@ -232,7 +271,7 @@ function ProductAddToCart() {
                   <ModalBody>
                     <FormControl p="2">
                       <FormLabel>Payment Status</FormLabel>
-                      {console.log("paymentstatus",data.paymentStatus)}
+                      {console.log("paymentstatus", data.paymentStatus)}
                       <RadioGroup defaultValue={data.paymentStatus}>
                         <Stack spacing={5} direction="row">
                           <Radio

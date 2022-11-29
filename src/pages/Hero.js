@@ -22,9 +22,9 @@ export default function CallToActionWithIllustration() {
           fontWeight={600}
           fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
           lineHeight={'110%'}>
-          Happy{' '}
+          VIT{' '}
           <Text as={'span'} color={'orange.400'}>
-            Pallate
+            Canteen
           </Text>
         </Heading>
         <Text color={'gray.500'} maxW={'3xl'}>

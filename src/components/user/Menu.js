@@ -13,6 +13,8 @@ import {
   useToast,
   Select,
   FormLabel,
+  keyframes,
+  usePrefersReducedMotion,
 } from "@chakra-ui/react";
 import { db } from "../../firebase/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -24,7 +26,25 @@ import { RoleContext } from "../../App";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+const spin = keyframes`
+0% {
+  transform: scale(0.95);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+}
+
+70% {
+  transform: scale(1);
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+}
+
+100% {
+  transform: scale(0.95);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+`;
+
 export default function Menu() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [onfilter, setOFFfilter] = useState(false);
   const [newList, setNewList] = useState([]);
   const navigate = useNavigate();
@@ -35,6 +55,10 @@ export default function Menu() {
   const [cat, setCat] = useState([]);
   const [orderlist, setOrderlist] = useState([]);
   const [showbUtton, setShowbutton] = useState(false);
+  const animation = prefersReducedMotion
+    ? undefined
+    : `${spin} infinite 2s linear`;
+
   const getData = async () => {
     try {
       const res = await fetch("/showorders", {
@@ -85,7 +109,7 @@ export default function Menu() {
       return (
         item.studentname === role.name &&
         item.ishowed === false &&
-        item.orderStatus !== "Done" 
+        item.orderStatus !== "Done"
         // item.paymentStatus !== "Done"
       );
     });
@@ -221,7 +245,27 @@ export default function Menu() {
             })}
           </Select>
         </Box>
-        {showbUtton && <Button onClick={handleNOT}>Get order</Button>}
+        {showbUtton && (
+          <Button onClick={handleNOT} display="flex">
+            Get Order Details &nbsp;
+            <Icon
+              background="black"
+              borderRadius="100%"
+              m="5px"
+              height="18px"
+              width="18px"
+              transform="scale(1)"
+              animation={animation}
+              viewBox="0 0 200 200"
+              color="red.400"
+            >
+              <path
+                fill="currentColor"
+                d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+              />
+            </Icon>
+          </Button>
+        )}
         {/* <Button onClick={() => navigate("/user/myorders")}>My Orders</Button>
         <Button onClick={() => navigate("/")}>LogOut</Button> */}
         <Box

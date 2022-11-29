@@ -9,12 +9,14 @@ import {
   //   chakra,
   Tooltip,
   IconButton,
+  Spinner
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import Veg from "../../Images/icons8-vegetarian-food-symbol-48.png";
 import NonVeg from "../../Images/icons8-non-vegetarian-food-symbol-48.png";
+import { Suspense } from "react";
 
 function ProductAddToCart(props) {
   return (
@@ -26,6 +28,7 @@ function ProductAddToCart(props) {
       )}
       {props.itm.map((data) => {
         return (
+          <Suspense fallback={<Spinner/>}>
           <Box
             // bg={useColorModeValue("white", "gray.800")}
             maxW="sm"
@@ -172,6 +175,7 @@ function ProductAddToCart(props) {
               </Flex>
             </Box>
           </Box>
+          </Suspense>
         );
       })}
     </Flex>

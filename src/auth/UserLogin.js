@@ -107,18 +107,6 @@ export default function SimpleCard(props) {
                                 Register Here
                             </Button>
                         </Stack>
-                        <Divider/>
-                        <Center>
-                            <Button
-                                w='100%'
-                                maxW={'md'}
-                                variant={'outline'}
-                                leftIcon={<FcGoogle />}>
-                                <Center>
-                                <Text>Sign in with Google</Text>
-                                </Center>
-                            </Button>
-                        </Center>
                     </Stack>
                 </Box>
             </Stack>

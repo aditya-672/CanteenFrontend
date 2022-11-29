@@ -21,6 +21,7 @@ import {
   Button,
   Image,
   Icon,
+  useToast,
   IconButton,
 } from "@chakra-ui/react";
 import React from "react";
@@ -32,6 +33,7 @@ import "./Cart.css";
 import { useCart } from "react-use-cart";
 import { RoleContext } from "../../App";
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function loadScript(src) {
   return new Promise((resolve) => {
@@ -48,6 +50,8 @@ function loadScript(src) {
 }
 
 export default function ItemPage() {
+  const toast = useToast();
+  const navigate = useNavigate();
   const role = useContext(RoleContext);
   const {
     isEmpty,
@@ -89,11 +93,19 @@ export default function ItemPage() {
 
       const dataa = await res.json();
 
-      if (dataa === "404") {
-        return alert("Wrong");
-      }
-      if (dataa === "200") {
-        alert("Success");
+      // if (dataa === "404") {
+      //   return alert("Wrong");
+      // }
+      if (dataa) {
+        toast({
+          title: `Order Successful , Your Order ID : ${dataa}`,
+          description : "Please wait till your food is ready 🍴",
+          position: "top",
+          status : "success", 
+          duration : 6000,
+          isClosable: true,
+        })
+        navigate('/user/menupage')
       }
     } catch (err) {
       alert(err);
@@ -114,8 +126,8 @@ export default function ItemPage() {
       key: "rzp_test_AF7oK8dU9P697X",
       currency: "INR",
       amount: cartTotal * 100,
-      name: "Happy Palate",
-      description: "Thank you for choosing Happy Palate",
+      name: "VIT Canteen",
+      description: "Thank you for choosing VIT Canteen",
       image: "http://localhost:1337/logo.svg",
       handler: function (response) {
         paymentID = response.razorpay_payment_id;

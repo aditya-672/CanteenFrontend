@@ -16,6 +16,7 @@ import {
   Accordion,
   AccordionItem,
   AccordionIcon,
+  Input,
   AccordionPanel,
   AccordionButton,
   TableContainer,
@@ -79,7 +80,7 @@ export default function Category() {
         </Flex>
       </Box>
       <TableContainer p="9">
-        <Table variant="simple">
+        <Table variant="simple" textAlign="center">
           <Thead>
             <Tr>
               <Th fontSize="1.5rem">Sr. No.</Th>
@@ -98,7 +99,7 @@ export default function Category() {
             return (
               <Tbody key={item.id}>
                 <Tr>
-                  <Td>{index+1}</Td>
+                  <Td>{index + 1}</Td>
                   <Td>
                     <Accordion allowMultiple>
                       {item.order.map((data) => {
@@ -123,7 +124,8 @@ export default function Category() {
                   </Td>
                   <Td>{item.totalprice}</Td>
                   <Td>{item.studentname}</Td>
-                  <Td>{date.toLocaleDateString()}</Td>
+                  {/* <Td>{date.toLocaleDateString()}</Td> */}
+                  <Td>{date.toLocaleDateString('en-GB')}</Td>
                   <Td>{item.paymentStatus}</Td>
                   <Td isNumeric>
                     <ButtonGroup>
