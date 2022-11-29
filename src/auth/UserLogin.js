@@ -24,7 +24,8 @@ export default function SimpleCard(props) {
   const loginhandler = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch("./userlogin", {
+      const res = await fetch("https://canteenbackend-0x8v.onrender.com/userlogin", {
+        mode:"no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
